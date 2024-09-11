@@ -63,6 +63,64 @@
                                     <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> Dashboard
                                 </a>
                             </li>
+                            <hr class="text-white">
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'courses.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('courses.index') }}">
+                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> courses
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'modules.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('modules.index') }}">
+                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> modules
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'materials.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('materials.index') }}">
+                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> materials
+                                </a>
+                            </li>
+                            <hr class="text-white">
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'quizzes.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('quizzes.index') }}">
+                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> quizzes
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'quiz_questions.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('quiz_questions.index') }}">
+                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> quiz_questions
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'quiz_answers.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('quiz_answers.index') }}">
+                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> quiz_answers
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'certificates.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('certificates.index') }}">
+                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> certificates
+                                </a>
+                            </li>
+                            <hr class="text-white">
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'chat.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('chat.index') }}">
+                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> chat
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'private_messages.index' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('private_messages.index') }}">
+                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> private_messages
+                                </a>
+                            </li>
+                            
                         </ul>
 
 
