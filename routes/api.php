@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ApiDashboardController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Api\ApiCoursesPageController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,4 +33,6 @@ Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->middl
 
 Route::resource('dashboard', ApiDashboardController::class);
 
-
+Route::get('/corsi', [ApiCoursesPageController::class, 'index']);  // Elenco di tutti i corsi
+Route::get('/corsi/{id}', [ApiCoursesPageController::class, 'show']);  // Dettagli di un singolo corso e relativi moduli
+Route::get('/moduli/{id}/materiali', [ApiCoursesPageController::class, 'showMaterials']);  // Materiali di un modulo
