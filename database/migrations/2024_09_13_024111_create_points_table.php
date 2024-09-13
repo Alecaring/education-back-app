@@ -11,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Gestisce i materiali condivisi dagli utenti
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('points', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('module_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('file_url');
-            $table->text('description');
+            $table->integer('points_gained')->default(0);
             $table->timestamps();
 
-            $table->foreign('module_id')->references('id')->on('modules');
             $table->foreign('user_id')->references('id')->on('users');
-
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('materials');
+        Schema::dropIfExists('points');
     }
 };

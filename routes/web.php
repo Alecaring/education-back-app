@@ -7,11 +7,16 @@ use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\PointController;
 use App\Http\Controllers\PrivateMessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizAnswerController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\QuizQuestionController;
+use App\Http\Controllers\RewardController;
+
+use App\Http\Controllers\TestController;
+
 use App\Models\ChatDiscussion;
 use App\Models\Material;
 use Illuminate\Support\Facades\Route;
@@ -64,7 +69,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/private-messages', [PrivateMessageController::class, 'index'])->name('private_messages.index');
     Route::post('/private-messages', [PrivateMessageController::class, 'store'])->name('private_messages.store');
 
+    Route::get('/points/{userId}', [PointController::class, 'showPoints'])->name('points.show');
 
+    Route::get('/rewards', [RewardController::class, 'index'])->name('rewards.index');
+    Route::get('/rewards/check/{userId}', [RewardController::class, 'checkRewards'])->name('rewards.check');
+    Route::post('/rewards/redeem', [RewardController::class, 'redeemReward'])->name('rewards.redeem');
+
+    Route::post('/quizzes/complete/{quizId}', [QuizController::class, 'completeQuiz'])->name('quizzes.complete');
+
+    Route::resource('quizzes', QuizController::class);
+    Route::post('quizzes/{quizId}/complete', [QuizController::class, 'completeQuiz'])->name('quizzes.complete');
+    Route::get('points', [RewardController::class, 'index'])->name('points.index');
+    Route::get('rewards/{rewardId}/redeem', [RewardController::class, 'redeemReward'])->name('rewards.redeem');
+
+    Route::resource('test', TestController::class);
+    Route::get('/show-test/{id}', [TestController::class, 'show'])->name('test.show');
+    Route::get('/show-materials/{id}', [TestController::class, 'showMaterials'])->name('test.showMaterials');
 });
 
 require __DIR__ . '/auth.php';

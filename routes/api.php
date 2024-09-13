@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiDashboardController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,7 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 // Rotta per la richiesta di logout (distruzione della sessione)
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth:sanctum');
+
+Route::resource('dashboard', ApiDashboardController::class);
+
+

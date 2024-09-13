@@ -5,7 +5,7 @@
 @section('content')
     <div class="my-4">
         <h1>Edit Course</h1>
-        <form action="{{ route('courses.update', $course->id) }}" method="POST">
+        <form action="{{ route('courses.update', $course->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -23,6 +23,10 @@
                     <option value="intermediate" {{ $course->level == 'intermediate' ? 'selected' : '' }}>Intermediate</option>
                     <option value="advanced" {{ $course->level == 'advanced' ? 'selected' : '' }}>Advanced</option>
                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Insert a cover image</label>
+                <input name="coverImgCourses" class="form-control" type="file" id="formFile">
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
             <a href="{{ route('courses.index') }}" class="btn btn-secondary">Cancel</a>

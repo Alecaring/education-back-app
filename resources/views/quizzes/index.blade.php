@@ -1,44 +1,25 @@
 @extends('layouts.admin')
 
-@section('title', 'Quizzes')
-
 @section('content')
-    <div class="my-4">
-        <h1>Quizzes</h1>
-
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        <a href="{{ route('quizzes.create') }}" class="btn btn-primary mb-3">Create New Quiz</a>
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Module</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($quizzes as $quiz)
-                    <tr>
-                        <td>{{ $quiz->title }}</td>
-                        <td>{{ $quiz->module->title }}</td>
-                        <td>
-                            <a href="{{ route('quizzes.show', $quiz->id) }}" class="btn btn-info btn-sm">View</a>
-                            <a href="{{ route('quizzes.edit', $quiz->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('quizzes.destroy', $quiz->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div>
+        <h1>{{ $quiz->title }}</h1>
     </div>
+
+    @foreach ($question as $q)
+        <div>
+            <h2>{{ $q->question }}</h2>
+            <form method="POST" action="{{ route('quizzes.complete', $quiz->id) }}">
+                @csrf
+                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+
+                @foreach ($q->answers as $a)
+                    <div>
+                        <input type="radio" name="answers[{{ $q->id }}]" value="{{ $a->id }}" required>
+                        <label>{{ $a->answer }}</label>
+                    </div>
+                @endforeach
+                <button type="submit" class="btn btn-primary">Verifica</button>
+            </form>
+        </div>
+    @endforeach
 @endsection

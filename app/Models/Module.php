@@ -27,4 +27,8 @@ class Module extends Model
     public function quiz() {
         return $this->hasMany(Quiz::class);
     }
+
+    public function materials() {
+        return $this->hasMany(Material::class);
+    }
 }

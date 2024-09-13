@@ -23,7 +23,7 @@ class MaterialController extends Controller
         $request->validate([
             'module_id' => 'required|exists:modules,id',
             'description' => 'required|string',
-            'file' => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048',
+            'file' => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048', 
         ]);
 
         // Handle the file upload

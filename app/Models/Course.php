@@ -13,9 +13,10 @@ class Course extends Model
         'name',
         'description',
         'level',
+        'coverImgCourses'
     ];
 
-    public function module() {
+    public function modules() {
 
         return $this->hasMany(Module::class);
         

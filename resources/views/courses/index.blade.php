@@ -31,9 +31,9 @@
                             <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewCourseModal" data-course="{{ json_encode($course) }}">
                                 <i class="bi bi-eye"></i> View
                             </button>
-                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editCourseModal" data-course="{{ json_encode($course) }}">
+                            <a href="{{ route('courses.edit', $course->id) }}" class="btn btn-warning btn-sm" >
                                 <i class="bi bi-pencil"></i> Edit
-                            </button>
+                            </a>
                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteCourseModal" data-course-id="{{ $course->id }}">
                                 <i class="bi bi-trash"></i> Delete
                             </button>

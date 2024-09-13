@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('quizzes', function (Blueprint $table) {
+        Schema::create('actions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('module_id');
-            $table->string('title');
-            $table->integer('points'); // Punti assegnati per il quiz
+            $table->string('action_type');
+            $table->integer('points');
             $table->timestamps();
-
-            $table->foreign('module_id')->references('id')->on('modules');
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quizzes');
+        Schema::dropIfExists('actions');
     }
 };

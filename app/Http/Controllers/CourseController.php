@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\New_;
 
 class CourseController extends Controller
 {
@@ -31,16 +32,34 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
+        // Validazione dei dati di input
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'level' => 'required|string|in:beginner,intermediate,advanced',
+            'coverImgCourses' => 'nullable|file|mimes:pdf,doc,docx,jpg,png,webp|max:2048',
         ]);
 
-        Course::create($request->all());
+        // Creazione del nuovo corso
+        $course = new Course();
+        $course->name = $request->name;
+        $course->description = $request->description;
+        $course->level = $request->level;
 
+        // Gestione del file di copertura
+        if ($request->hasFile('coverImgCourses')) {
+            $file = $request->file('coverImgCourses');
+            $file_path = $file->store('coverImgCourses', 'public');
+            $course->coverImgCourses = $file_path;
+        }
+
+        // Salvataggio del corso
+        $course->save();
+
+        // Reindirizzamento con messaggio di successo
         return redirect()->route('courses.index')->with('success', 'Course created successfully');
     }
+
 
     public function edit($id)
     {
@@ -55,22 +74,41 @@ class CourseController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Trova il corso
         $course = Course::find($id);
 
+        // Controlla se il corso esiste
         if (!$course) {
             return redirect()->route('courses.index')->with('error', 'Course not found');
         }
 
+        // Validazione dei dati
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'level' => 'required|string|in:beginner,intermediate,advanced',
+            'coverImgCourses' => 'nullable|file|mimes:pdf,doc,docx,jpg,png,webp|max:2048',
         ]);
 
-        $course->update($request->all());
+        // Se è stato caricato un file, gestisci l'upload
+        if ($request->hasFile('coverImgCourses')) {
+            $file = $request->file('coverImgCourses');
+            $file_path = $file->store('coverImgCourses', 'public');
+            $course->coverImgCourses = $file_path;
+        }
 
+        // Aggiorna il corso con i dati del modulo
+        $course->name = $request->input('name');
+        $course->description = $request->input('description');
+        $course->level = $request->input('level');
+
+        // Salva le modifiche
+        $course->save();
+
+        // Redirect con messaggio di successo
         return redirect()->route('courses.index')->with('success', 'Course updated successfully');
     }
+
 
     public function destroy($id)
     {
