@@ -50,10 +50,15 @@ class User extends Authenticatable
         return $this->hasMany(Certificate::class);
     }
 
-    
+
     public function chatMessage()
     {
 
         return $this->hasMany(ChatMessage::class);
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
     }
 }

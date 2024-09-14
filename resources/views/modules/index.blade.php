@@ -26,7 +26,7 @@
                 @foreach($modules as $module)
                     <tr>
                         <td>{{ $module->title }}</td>
-                        <td>{{ $module->course->name }}</td>
+                        <td>{{ $module->content }}</td>
                         <td>
                             <a href="{{ route('modules.show', $module->id) }}" class="btn btn-info btn-sm">View</a>
                             <a href="{{ route('modules.edit', $module->id) }}" class="btn btn-warning btn-sm">Edit</a>

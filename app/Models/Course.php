@@ -13,7 +13,8 @@ class Course extends Model
         'name',
         'description',
         'level',
-        'coverImgCourses'
+        'coverImgCourses',
+        'requisites'
     ];
 
     public function modules() {
@@ -27,4 +28,9 @@ class Course extends Model
         return $this->hasMany(Certificate::class);
         
     }
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }

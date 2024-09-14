@@ -9,27 +9,31 @@ use Illuminate\Http\Request;
 
 class ApiCoursesPageController extends Controller
 {
-    public function index() {
-        $corsi = Course::all();
+    public function index()
+    {
+        $corsi = Course::with('user')->get();
 
-        // Restituisci i corsi in formato JSON
         return response()->json($corsi);
     }
 
-    public function show($id) {
-        $corso = Course::find($id);
+    public function show($id)
+    {
+        // Trova il corso con l'ID specificato e include l'utente associato
+        $corso = Course::with('user', 'modules')->find($id);
 
         if (!$corso) {
             return response()->json(['error' => 'Corso non trovato.'], 404);
         }
 
-        $moduli = $corso->modules;
-
         // Restituisci il corso e i moduli associati in formato JSON
-        return response()->json(['corso' => $corso, 'moduli' => $moduli]);
+        return response()->json([
+            'corso' => $corso,
+            'moduli' => $corso->modules
+        ]);
     }
 
-    public function showMaterials($id) {
+    public function showMaterials($id)
+    {
         $modulo = Module::find($id);
 
         if (!$modulo) {

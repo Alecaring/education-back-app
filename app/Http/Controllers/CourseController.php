@@ -32,7 +32,6 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        // Validazione dei dati di input
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -40,23 +39,23 @@ class CourseController extends Controller
             'coverImgCourses' => 'nullable|file|mimes:pdf,doc,docx,jpg,png,webp|max:2048',
         ]);
 
-        // Creazione del nuovo corso
         $course = new Course();
         $course->name = $request->name;
         $course->description = $request->description;
         $course->level = $request->level;
 
-        // Gestione del file di copertura
         if ($request->hasFile('coverImgCourses')) {
             $file = $request->file('coverImgCourses');
             $file_path = $file->store('coverImgCourses', 'public');
             $course->coverImgCourses = $file_path;
         }
 
-        // Salvataggio del corso
+        if (auth()->check()) {
+            $course->user_id = auth()->id();
+        }
+
         $course->save();
 
-        // Reindirizzamento con messaggio di successo
         return redirect()->route('courses.index')->with('success', 'Course created successfully');
     }
 
