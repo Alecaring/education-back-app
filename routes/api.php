@@ -36,3 +36,6 @@ Route::resource('dashboard', ApiDashboardController::class);
 Route::get('/corsi', [ApiCoursesPageController::class, 'index']);  // Elenco di tutti i corsi
 Route::get('/corsi/{id}', [ApiCoursesPageController::class, 'show']);  // Dettagli di un singolo corso e relativi moduli
 Route::get('/moduli/{id}/materiali', [ApiCoursesPageController::class, 'showMaterials']);  // Materiali di un modulo
+
+Route::put('/materials/{id}/status', [ApiCoursesPageController::class, 'updateStatus']);
+

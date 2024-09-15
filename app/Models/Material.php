@@ -14,6 +14,7 @@ class Material extends Model
         'user_id',
         'file_url',
         'description',
+        'completed'
     ];
 
     // Define the relationship with the Module model

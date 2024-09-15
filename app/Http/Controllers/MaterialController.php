@@ -23,23 +23,30 @@ class MaterialController extends Controller
         $request->validate([
             'module_id' => 'required|exists:modules,id',
             'description' => 'required|string',
-            'file' => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048', 
+            'file' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048', // Modificato a nullable
         ]);
 
-        // Handle the file upload
-        $file = $request->file('file');
-        $filePath = $file->store('materials', 'public');
-
-        // Create a new material record
+        // Crea un nuovo record per il materiale
         $material = new Material();
         $material->module_id = $request->module_id;
         $material->user_id = auth()->id();
-        $material->file_url = $filePath;
         $material->description = $request->description;
+
+        // Controlla se è stato caricato un file
+        if ($request->hasFile('file')) {
+            // Gestisce il caricamento del file
+            $file = $request->file('file');
+            $filePath = $file->store('materials', 'public');
+            $material->file_url = $filePath;
+        } else {
+            $material->file_url = null;
+        }
+
         $material->save();
 
         return redirect()->route('materials.index')->with('success', 'Material uploaded successfully!');
     }
+
 
     // Display a list of all materials
     public function index()

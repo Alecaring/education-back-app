@@ -17,6 +17,7 @@ class Module extends Model
         'course_id',
         'title',
         'content',
+        'completed'
     ];
 
     public function course()

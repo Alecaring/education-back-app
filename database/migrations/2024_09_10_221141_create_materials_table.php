@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('module_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('file_url');
+            $table->string('file_url')->nullable();
             $table->text('description');
             $table->timestamps();
 
